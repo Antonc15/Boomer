@@ -9,9 +9,9 @@ public class MineTime : MonoBehaviour
     public float explosionFeelDistance;
     public int liveTime;
     public int maxDamage;
+    public float explosionRadius;
 
     [Header("Knockback")]
-    public float knockbackRadius;
     public float knockbackStrength;
 
     [HideInInspector]
@@ -49,7 +49,7 @@ public class MineTime : MonoBehaviour
 
     void ExplosionKnockback()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, knockbackRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach (Collider hit in colliders)
         {
@@ -58,13 +58,13 @@ public class MineTime : MonoBehaviour
                 rb = hit.GetComponent<Rigidbody>();
 
             if (rb != null)
-                rb.AddExplosionForce(knockbackStrength, transform.position, knockbackRadius, knockbackRadius / 10);
+                rb.AddExplosionForce(knockbackStrength, transform.position, explosionRadius, explosionRadius / 10);
         }
     }
 
     void ExplosionDamage()
     {
-        Collider[] cols = Physics.OverlapSphere(transform.position, knockbackRadius);
+        Collider[] cols = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach (Collider hit in cols)
         {
@@ -75,7 +75,7 @@ public class MineTime : MonoBehaviour
             {
                 float distance = Vector3.Distance(hit.transform.position, transform.position);
 
-                int damage = Mathf.RoundToInt(maxDamage * (knockbackRadius / distance) / knockbackRadius);
+                int damage = Mathf.RoundToInt(maxDamage * (explosionRadius / distance) / explosionRadius);
 
                 hit.GetComponentInParent<BreakableObject>().TakeDamage(damage);
             }
@@ -84,7 +84,7 @@ public class MineTime : MonoBehaviour
             {
                 float distance = Vector3.Distance(hit.transform.position, transform.position);
 
-                int damage = Mathf.RoundToInt(maxDamage * (knockbackRadius / distance) / knockbackRadius);
+                int damage = Mathf.RoundToInt(maxDamage * (explosionRadius / distance) / explosionRadius);
 
                 hit.GetComponentInParent<WallBreak>().TakeDamage(damage);
             }

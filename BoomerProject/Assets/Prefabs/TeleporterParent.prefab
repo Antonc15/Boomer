@@ -61,8 +61,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586947670831112302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.15, z: 0}
-  m_LocalScale: {x: 1.7, y: 1, z: 1.7}
+  m_LocalPosition: {x: 0, y: 0.256, z: 0}
+  m_LocalScale: {x: 1.7, y: 0.1, z: 1.7}
   m_Children: []
   m_Father: {fileID: 1130395494654173057}
   m_RootOrder: 3
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569ee84966d5a8d43992acab2b152f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportHeight: 1
+  velocityMultiplier: 1.2
   otherTeleporter: {fileID: 0}
   teleportSound: {fileID: 3549044356228168193, guid: b6680ba32acdea540be908ddea71a569,
     type: 3}

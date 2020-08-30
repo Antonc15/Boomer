@@ -11,6 +11,13 @@ public class BreakableObject : MonoBehaviour
     [Header("Objects")]
     public GameObject[] destroyedPrefabs;
 
+    Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;

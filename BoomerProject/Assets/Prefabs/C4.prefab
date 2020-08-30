@@ -259,7 +259,7 @@ MonoBehaviour:
   explosionFeelDistance: 20
   liveTime: 3
   maxDamage: 200
-  knockbackRadius: 5
+  explosionRadius: 5
   knockbackStrength: 1600
   spawnTime: 0
   explosionSound: {fileID: 4286513544617154283, guid: eff1bd68d92eb684baf369a64bb6374c,

@@ -19,6 +19,7 @@ public class BombThrow : MonoBehaviour
     void Throw()
     {
         GameObject mineClone = Instantiate(mine, transform.position, Quaternion.LookRotation(transform.forward));
+        mineClone.GetComponent<Rigidbody>().velocity = new Vector3(0,GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity.y,0);
         mineClone.GetComponent<Rigidbody>().AddForce(transform.forward * throwForce);
     }
 }

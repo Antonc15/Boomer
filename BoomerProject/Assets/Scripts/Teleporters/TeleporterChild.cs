@@ -8,48 +8,33 @@ public class TeleporterChild : MonoBehaviour
     public Teleporter parentTeleporter;
     [HideInInspector]
     public GameObject teleportSound;
+    [HideInInspector]
+    public float velocityMultiplier;
 
     void OnTriggerEnter(Collider other)
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
         Rigidbody rbParent = other.GetComponentInParent<Rigidbody>();
 
-        UsedTeleporterTag used = other.GetComponent<UsedTeleporterTag>();
-        UsedTeleporterTag usedParent = other.GetComponentInParent<UsedTeleporterTag>();
-
-        if (rb != null && used == null)
+        if (rb != null)
         {
             Teleport(other.transform);
         }
 
-        if (rbParent != null && usedParent == null)
+        if (rbParent != null)
         {
             Teleport(rbParent.transform);
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        UsedTeleporterTag used = other.GetComponent<UsedTeleporterTag>();
-        UsedTeleporterTag usedParent = other.GetComponentInParent<UsedTeleporterTag>();
-
-        if (used != null)
-        {
-            Destroy(used);
-        }
-
-        if (usedParent != null)
-        {
-            Destroy(usedParent);
-        }
-    }
-
     void Teleport(Transform other)
     {
-        UsedTeleporterTag used = other.gameObject.AddComponent<UsedTeleporterTag>();
+        Rigidbody rb = other.GetComponent<Rigidbody>();
 
         if (parentTeleporter != null)
-            other.transform.position = parentTeleporter.transform.position + (transform.up * parentTeleporter.teleportHeight);
+            other.transform.position = parentTeleporter.transform.position + (Vector3.up * 0.1f);
+
+        rb.velocity = new Vector3(rb.velocity.x, Mathf.Abs(rb.velocity.y) * velocityMultiplier, rb.velocity.z);
 
         GameObject sound = Instantiate(teleportSound, transform.position, Quaternion.identity);
         sound.transform.parent = FindObjectOfType<SoundHandler>().transform;
